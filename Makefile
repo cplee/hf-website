@@ -7,5 +7,5 @@ DOCKER      := docker run --rm -v $(shell dirname $(realpath $(lastword $(MAKEFI
 AWS         := $(DOCKER) -v $(HOME)/.aws:/root/.aws -e AWS_PROFILE -e AWS_REGION $(AWS_IMAGE) 
 
 deploy:
-	$(AWS) s3 sync --acl "public-read" --sse "AES256" --exclude ".git/*" ./ s3://$(BUCKET_NAME)/
+	$(AWS) s3 sync  --sse "AES256" --exclude ".git/*" --exclude ".DS_Store" --exclude ".vscode/*" --exclude "Makefile" --exclude .gitignore ./ s3://$(BUCKET_NAME)/
 
